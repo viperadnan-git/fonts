@@ -2,6 +2,16 @@
 
 A static font listing website built with Next.js, showcasing font families with interactive previews.
 
+[![Next.js](https://img.shields.io/github/package-json/dependency-version/viperadnan-git/fonts/next?logo=next.js&logoColor=white&label=Next.js&color=black)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/github/package-json/dependency-version/viperadnan-git/fonts/dev/typescript?logo=typescript&logoColor=white&label=TypeScript&color=3178C6)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/github/package-json/dependency-version/viperadnan-git/fonts/dev/tailwindcss?logo=tailwind-css&logoColor=white&label=Tailwind&color=06B6D4)](https://tailwindcss.com)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/viperadnan-git/fonts/deploy.yml?logo=github&label=Deploy)](https://github.com/viperadnan-git/fonts/actions/workflows/deploy.yml)
+[![License](https://img.shields.io/github/license/viperadnan-git/fonts?color=blue)](https://github.com/viperadnan-git/fonts/blob/main/LICENSE)
+[![Live Demo](https://img.shields.io/website?url=https%3A%2F%2Fviperadnan-git.github.io%2Ffonts&label=Demo&color=brightgreen)](https://viperadnan-git.github.io/fonts)
+
+> [!WARNING]
+> **Disclaimer**: All fonts displayed are provided for **educational and preview purposes only**. These are trial versions, free fonts, or sourced from public archives. All fonts remain the property of their respective copyright holders. Downloading does not grant usage rights. For commercial use, please obtain proper licenses from the original foundries. See the [legal disclaimer](/legal) for full terms.
+
 ## Features
 
 - 📚 Browse font families with pagination
@@ -126,29 +136,6 @@ Deploy the `out` directory.
 - `bun run build:custom` - Build with custom BASE_PATH from env
 - `bun run fonts:generate` - Regenerate font metadata
 
-## Project Structure
-
-```
-fonts/
-├── app/                    # Next.js app directory
-│   ├── [slug]/            # Dynamic font detail pages
-│   ├── legal/             # Legal disclaimer page
-│   └── page.tsx           # Home page
-├── components/            # React components
-│   ├── fonts/            # Font-specific components
-│   ├── layout/           # Layout components
-│   └── ui/               # shadcn/ui components
-├── lib/                  # Utility functions
-│   └── fonts/            # Font parsing & generation
-├── scripts/              # Build scripts
-│   └── generate-fonts.ts # Font metadata generator
-├── public/               # Static files
-│   ├── copernicus/      # Font files directory
-│   ├── fonts.css        # Generated font CSS
-│   └── fonts-data.json  # Generated font metadata
-└── out/                  # Build output (static site)
-```
-
 ## How It Works
 
 1. **Font Parsing**: `fontkit` extracts metadata from font files
@@ -156,15 +143,6 @@ fonts/
 3. **Static Generation**: Creates static HTML pages
 4. **Font Previews**: Each variant has editable preview text
 5. **Deployment**: Serves as static site from `out/` directory
-
-## Technologies
-
-- **Next.js 16** - React framework with static export
-- **shadcn/ui** - UI component library
-- **Tailwind CSS 4** - Styling with OKLCH color space
-- **fontkit** - Font metadata extraction
-- **next-themes** - Dark/light theme support
-- **Bun** - Package manager and runtime
 
 ## License
 
