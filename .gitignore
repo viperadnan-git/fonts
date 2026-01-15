@@ -40,4 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# generated files (created during build)
+/public/fonts-data.json
+/public/fonts.css
+
 .claude/settings.local.json
