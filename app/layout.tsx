@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description: "Browse and preview a curated collection of beautiful typefaces. View font families, variants, and test them with custom text.",
 };
 
+// Get basePath from environment for fonts.css link
+const basePath = process.env.BASE_PATH || '';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="stylesheet" href="/fonts.css" />
+        <link rel="stylesheet" href={`${basePath}/fonts.css`} />
       </head>
       <body className="antialiased">
         <ThemeProvider
