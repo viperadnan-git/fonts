@@ -40,3 +40,6 @@ export const PREVIEW_LOREM_FONT_SIZE = 16;
 
 // Toast/notification durations (milliseconds)
 export const COPY_SUCCESS_TOAST_DURATION = 2000;
+
+// Base path for deployment (e.g., "/fonts" for subdirectory hosting)
+export const BASE_PATH = process.env.BASE_PATH || '';

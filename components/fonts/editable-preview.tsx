@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -36,12 +36,12 @@ export function EditablePreview({ family }: EditablePreviewProps) {
   const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPOSITORY || DEFAULT_GITHUB_REPOSITORY;
   const githubBranch = process.env.NEXT_PUBLIC_GITHUB_BRANCH || DEFAULT_GITHUB_BRANCH;
 
-  const getJsDelivrUrl = (filePath: string) => {
+  const getJsDelivrUrl = useCallback((filePath: string) => {
     const cleanPath = filePath.startsWith('/') ? filePath.substring(1) : filePath;
     return `https://cdn.jsdelivr.net/gh/${githubRepo}@${githubBranch}/public/${cleanPath}`;
-  };
+  }, [githubRepo, githubBranch]);
 
-  const getCssImportCode = () => {
+  const getCssImportCode = useCallback(() => {
     const url = getJsDelivrUrl(variant.filePath);
     return `@font-face {
   font-family: '${cssFamilyName}';
@@ -50,18 +50,18 @@ export function EditablePreview({ family }: EditablePreviewProps) {
   font-style: ${variant.style};
   font-display: swap;
 }`;
-  };
+  }, [getJsDelivrUrl, variant, cssFamilyName]);
 
-  const getHtmlLinkCode = () => {
+  const getHtmlLinkCode = useCallback(() => {
     const url = getJsDelivrUrl(variant.filePath);
     return `<link rel="preload" href="${url}" as="font" type="font/${variant.format}" crossorigin>`;
-  };
+  }, [getJsDelivrUrl, variant]);
 
-  const getJsDelivrUrlOnly = () => {
+  const getJsDelivrUrlOnly = useCallback(() => {
     return getJsDelivrUrl(variant.filePath);
-  };
+  }, [getJsDelivrUrl, variant]);
 
-  const handleCopy = async (code: string, type: string) => {
+  const handleCopy = useCallback(async (code: string, type: string) => {
     try {
       await navigator.clipboard.writeText(code);
       setCopiedButton(type);
@@ -70,7 +70,7 @@ export function EditablePreview({ family }: EditablePreviewProps) {
     } catch {
       toast.error('Failed to copy to clipboard');
     }
-  };
+  }, []);
 
   return (
     <div className="space-y-6">

@@ -23,8 +23,10 @@ export default async function FontDetailPage({ params }: FontDetailPageProps) {
     notFound();
   }
 
+  const cssFamilyName = family.mainVariant.cssFamilyName || 'Copernicus';
+
   return (
-    <>
+    <div style={{ fontFamily: cssFamilyName }}>
       {/* Back Button */}
       <div className="mb-6">
         <Link href="/">
@@ -37,7 +39,7 @@ export default async function FontDetailPage({ params }: FontDetailPageProps) {
 
       {/* Font Family Name */}
       <div className="mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
           {family.displayName}
         </h1>
         <FontInfo family={family} />
@@ -45,6 +47,6 @@ export default async function FontDetailPage({ params }: FontDetailPageProps) {
 
       {/* Client-side preview controls and variants */}
       <ClientPage family={family} />
-    </>
+    </div>
   );
 }

@@ -45,9 +45,13 @@ export function parseFontFile(filePath: string, dirName: string): FontVariant | 
     // Get width from OS/2 table (1-9, 5=normal)
     const width = font['OS/2']?.usWidthClass || DEFAULT_FONT_WIDTH;
 
-    // Determine style from italic angle
+    // Determine style from italic angle or filename
+    // Some fonts have italicAngle=0 even when they're italic, so check filename too
+    const isItalic = font.italicAngle !== 0 ||
+      /italic|oblique|slanted/i.test(fileName) ||
+      /italic|oblique|slanted/i.test(postscriptName);
     const style: 'normal' | 'italic' | 'oblique' =
-      font.italicAngle !== 0 ? 'italic' : 'normal';
+      isItalic ? 'italic' : 'normal';
 
     // Determine format from extension
     let format: 'truetype' | 'opentype' | 'woff' | 'woff2';

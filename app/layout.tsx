@@ -4,14 +4,12 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { DocumentContainer } from "@/components/layout/document-container";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Toaster } from "sonner";
+import { BASE_PATH } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Font Library - Typography Collection",
   description: "Browse and preview a curated collection of beautiful typefaces. View font families, variants, and test them with custom text.",
 };
-
-// Get basePath from environment for fonts.css link
-const basePath = process.env.BASE_PATH || '';
 
 export default function RootLayout({
   children,
@@ -21,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="stylesheet" href={`${basePath}/fonts.css`} />
+        <link rel="stylesheet" href={`${BASE_PATH}/fonts.css`} />
       </head>
       <body className="antialiased">
         <ThemeProvider

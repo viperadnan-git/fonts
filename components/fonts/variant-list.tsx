@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -35,12 +35,12 @@ export function VariantList({
   const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPOSITORY || DEFAULT_GITHUB_REPOSITORY;
   const githubBranch = process.env.NEXT_PUBLIC_GITHUB_BRANCH || DEFAULT_GITHUB_BRANCH;
 
-  const getJsDelivrUrl = (filePath: string) => {
+  const getJsDelivrUrl = useCallback((filePath: string) => {
     const cleanPath = filePath.startsWith('/') ? filePath.substring(1) : filePath;
     return `https://cdn.jsdelivr.net/gh/${githubRepo}@${githubBranch}/public/${cleanPath}`;
-  };
+  }, [githubRepo, githubBranch]);
 
-  const getCssImportCode = (variant: FontVariant) => {
+  const getCssImportCode = useCallback((variant: FontVariant) => {
     const url = getJsDelivrUrl(variant.filePath);
     const cssFamilyName = variant.cssFamilyName || DEFAULT_FONT_FAMILY;
     return `@font-face {
@@ -50,18 +50,18 @@ export function VariantList({
   font-style: ${variant.style};
   font-display: swap;
 }`;
-  };
+  }, [getJsDelivrUrl]);
 
-  const getHtmlLinkCode = (variant: FontVariant) => {
+  const getHtmlLinkCode = useCallback((variant: FontVariant) => {
     const url = getJsDelivrUrl(variant.filePath);
     return `<link rel="preload" href="${url}" as="font" type="font/${variant.format}" crossorigin>`;
-  };
+  }, [getJsDelivrUrl]);
 
-  const getJsDelivrUrlOnly = (variant: FontVariant) => {
+  const getJsDelivrUrlOnly = useCallback((variant: FontVariant) => {
     return getJsDelivrUrl(variant.filePath);
-  };
+  }, [getJsDelivrUrl]);
 
-  const handleCopy = async (code: string, type: string, variantIndex: number) => {
+  const handleCopy = useCallback(async (code: string, type: string, variantIndex: number) => {
     try {
       await navigator.clipboard.writeText(code);
       setCopiedButton(`${type}-${variantIndex}`);
@@ -70,10 +70,10 @@ export function VariantList({
     } catch {
       toast.error('Failed to copy to clipboard');
     }
-  };
+  }, []);
 
   // Sort variants by weight (descending - heaviest first), then by style (normal before italic)
-  const sortedVariants = [...variants].sort((a, b) => {
+  const sortedVariants = useMemo(() => [...variants].sort((a, b) => {
     if (a.weight !== b.weight) {
       return b.weight - a.weight; // Reverse for descending (900 -> 100)
     }
@@ -81,7 +81,7 @@ export function VariantList({
     if (a.style === 'normal' && b.style !== 'normal') return -1;
     if (a.style !== 'normal' && b.style === 'normal') return 1;
     return 0;
-  });
+  }), [variants]);
 
   // Set initial content only once
   useEffect(() => {
@@ -204,7 +204,7 @@ export function VariantList({
             {/* Directly Editable Preview */}
             <div
               ref={(el) => { editableRefs.current[index] = el; }}
-              className="p-4 border rounded bg-muted/20 min-h-[80px] cursor-text focus:outline-none focus:ring-2 focus:ring-ring break-words"
+              className="p-4 border rounded bg-muted/20 min-h-[80px] cursor-text focus:outline-none focus:ring-2 focus:ring-ring wrap-break-word"
               contentEditable
               suppressContentEditableWarning
               style={{

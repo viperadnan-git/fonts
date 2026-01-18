@@ -123,67 +123,6 @@
     @apply bg-background text-foreground;
   }
 
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-Book.ttf") format("truetype");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-Medium.ttf") format("truetype");
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-Bold.ttf") format("truetype");
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-Heavy.ttf") format("truetype");
-    font-style: normal;
-    font-weight: 900;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-BookItalic.ttf") format("truetype");
-    font-style: italic;
-    font-weight: 400;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-MediumItalic.ttf") format("truetype");
-    font-style: italic;
-    font-weight: 500;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-BoldItalic.ttf") format("truetype");
-    font-style: italic;
-    font-weight: 700;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Copernicus";
-    src: url("/copernicus/CopernicusTrial-ExtraboldItalic.ttf") format("truetype");
-    font-style: italic;
-    font-weight: 800;
-    font-display: swap;
-  }
+  /* Font-face declarations for Copernicus are now auto-generated in /fonts.css */
+  /* This ensures proper BASE_PATH handling for deployment */
 }
